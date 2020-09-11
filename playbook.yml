@@ -1,30 +1,30 @@
 - hosts: server
   vars:
    image: abduhsalam/docker-ansible:beta
-   tasks: 
-    - name: install python-docker ubuntu
-      apt:
-       name: python-docker
-       state: present
-      when:
-      - ansible-distribution == "Ubuntu"
-    - name: install python-docker centos
-      yum:
-       name: python-docker
-       state: present
-      when:
-      - ansible_distribution == "CentOS"
-    - name: pull image
-      docker_image:
-       name: "{{ image }}"
-       state: present
-       force: yes
-    - name: create container
-      docker_container:
-       recreate: yes
-       name: docker_ansible
-       state: "{{ image }}"
-       exposed_ports:
-       - 8089:80
-       published_ports:
-       - 8089:80
+  tasks: 
+   - name: install python-docker ubuntu
+     apt:
+      name: python-docker
+      state: present
+     when:
+     - ansible-distribution == "Ubuntu"
+   - name: install python-docker centos
+     yum:
+      name: python-docker
+      state: present
+     when:
+     - ansible_distribution == "CentOS"
+   - name: pull image
+     docker_image:
+      name: "{{ image }}"
+      state: present
+      force: yes
+   - name: create container
+     docker_container:
+      recreate: yes  
+      name: docker_ansible
+      state: "{{ image }}"
+      exposed_ports:
+      - 8089:80
+      published_ports:
+      - 8089:80
