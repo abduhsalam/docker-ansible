@@ -23,7 +23,8 @@
      docker_container:
       recreate: yes  
       name: docker_ansible
-      state: "{{ image }}"
+      state: started
+      iamge: "{{ image }}"
       exposed_ports:
       - 8089:80
       published_ports:
